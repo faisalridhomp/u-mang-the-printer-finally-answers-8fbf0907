@@ -54,6 +54,10 @@ def write_entry():
         raise SystemExit(f"entry is {len(saved)} chars, gate is 1-240")
     if "\n" in saved:
         raise SystemExit("entry must be a single line")
+    if not saved.isascii():
+        raise SystemExit("entry must be ASCII-only")
+    if saved != saved.strip():
+        raise SystemExit("entry must have no leading or trailing whitespace")
     if saved != JOKE:
         raise SystemExit("entry.txt does not match the joke line")
     print(f"wrote {path}: {len(saved)} chars")
